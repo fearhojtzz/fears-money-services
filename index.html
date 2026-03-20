@@ -3,14 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fears Money Services</title>
+    <title>Money Shop</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, pink, blue);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            width: 100%;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+            margin: 10px;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        .card p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .buy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .buy-btn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Pricing</h1>
-    <ul>
-        <li>1M for $1 AUD</li>
-        <li>10M for $10 AUD</li>
-        <li>50M for $20 AUD</li>
-    </ul>
+    <div class="container">
+        <div class="card">
+            <h2>1M for $1</h2>
+            <p>Get your 1 Million!</p>
+            <button class="buy-btn">Buy Now</button>
+        </div>
+        <div class="card">
+            <h2>10M for $10</h2>
+            <p>Get your 10 Million!</p>
+            <button class="buy-btn">Buy Now</button>
+        </div>
+        <div class="card">
+            <h2>50M for $20</h2>
+            <p>Get your 50 Million!</p>
+            <button class="buy-btn">Buy Now</button>
+        </div>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('.buy-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+                const product = button.parentElement.querySelector('h2').innerText;
+                cart.push(product);
+                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                alert(product + ' added to cart!');
+            });
+        });
+    </script>
 </body>
 </html>
